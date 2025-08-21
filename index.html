@@ -64,6 +64,13 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.3);
             border: 3px solid #1a1a1a;
         }
+        
+        /* Explicitly remove any pseudo-elements */
+        .logo-badge::before,
+        .logo-badge::after {
+            display: none !important;
+            content: none !important;
+        }
 
         .logo-badge img {
             max-width: 200px;
