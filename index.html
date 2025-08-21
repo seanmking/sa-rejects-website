@@ -57,7 +57,7 @@
 
         .logo-badge {
             background: #f5f2ed;
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
             display: inline-block;
             position: relative;
@@ -74,7 +74,7 @@
         }
 
         .logo-badge img {
-            max-width: 200px;
+            max-width: 260px;
             width: 100%;
             height: auto;
             display: block;
@@ -611,6 +611,21 @@
             /* Remove pulse on mobile for performance */
             .notification:nth-child(n+6) {
                 animation: slideInMobile 0.3s ease-out forwards !important;
+            }
+
+            /* Optimize logo for mobile */
+            .logo-container {
+                margin-bottom: 20px;
+            }
+
+            .logo-badge {
+                padding: 12px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            }
+
+            .logo-badge img {
+                max-width: 180px;
             }
 
             .subtitle-strip {
