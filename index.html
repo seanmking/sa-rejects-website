@@ -29,20 +29,21 @@
             overflow: hidden;
         }
 
+        /* Background texture */
         .opening-hook::before {
-            content: "REJECTED";
+            content: "";
             position: absolute;
-            font-size: 20vw;
-            font-weight: 900;
-            opacity: 0.1;
-            transform: rotate(-15deg);
-            white-space: nowrap;
+            inset: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
+            pointer-events: none;
         }
 
         .hook-content {
             text-align: center;
             padding: 20px;
-            max-width: 900px;
+            max-width: 1200px;
+            width: 100%;
             position: relative;
             z-index: 2;
         }
@@ -80,22 +81,237 @@
         }
 
 
-        /* What We Are Strip - REMOVED */
-
-        .hook-content h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 900;
-            color: white;
-            line-height: 0.9;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
-        }
-
-        .hook-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+        /* Subtitle */
+        .subtitle-strip {
             color: white;
             margin-bottom: 40px;
+        }
+
+        .subtitle-strip p:first-child {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .subtitle-strip p:last-child {
+            font-size: 1.2rem;
             font-weight: 300;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Notification Stream Container */
+        .notification-container {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Individual Notifications */
+        .notification {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: absolute;
+            min-width: 280px;
+            max-width: 400px;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: slideInNotification 0.5s ease-out forwards;
+            border-left: 4px solid #25D366;
+        }
+
+        @keyframes slideInNotification {
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.payment {
+            border-left-color: #25D366;
+        }
+
+        .notification.opportunity {
+            border-left-color: #ffeb3b;
+        }
+
+        .notification.help {
+            border-left-color: #4267B2;
+        }
+
+        .notification.success {
+            border-left-color: #ff3333;
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .notification-app {
+            font-weight: 600;
+        }
+
+        .notification-time {
+            margin-left: auto;
+            font-size: 0.8rem;
+        }
+
+        .notification-content {
+            font-size: 1rem;
+            color: #1a1a1a;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .notification-content .amount {
+            color: #25D366;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .notification-content .highlight {
+            color: #ff3333;
+            font-weight: 700;
+        }
+
+        /* Positioning for notifications */
+        .notification:nth-child(1) {
+            left: 20%;
+            top: 10px;
+            animation-delay: 0.5s;
+        }
+
+        .notification:nth-child(2) {
+            left: 70%;
+            top: 40px;
+            animation-delay: 1s;
+        }
+
+        .notification:nth-child(3) {
+            left: 50%;
+            top: 100px;
+            animation-delay: 1.5s;
+        }
+
+        .notification:nth-child(4) {
+            left: 25%;
+            top: 160px;
+            animation-delay: 2s;
+        }
+
+        .notification:nth-child(5) {
+            left: 75%;
+            top: 200px;
+            animation-delay: 2.5s;
+        }
+
+        .notification:nth-child(6) {
+            left: 45%;
+            top: 270px;
+            animation-delay: 3s;
+        }
+
+        .notification:nth-child(7) {
+            left: 30%;
+            top: 340px;
+            animation-delay: 3.5s;
+        }
+
+        .notification:nth-child(8) {
+            left: 65%;
+            top: 380px;
+            animation-delay: 4s;
+        }
+
+        /* Pulse animation for recent notifications */
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.02); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        .notification:nth-child(n+6) {
+            animation: slideInNotification 0.5s ease-out forwards, pulse 2s ease-in-out infinite;
+        }
+
+        /* Voice note animation */
+        .voice-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin-top: 5px;
+        }
+
+        .voice-wave {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+        }
+
+        .voice-bar {
+            width: 3px;
+            background: #25D366;
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .voice-bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .voice-bar:nth-child(2) { height: 18px; animation-delay: 0.1s; }
+        .voice-bar:nth-child(3) { height: 14px; animation-delay: 0.2s; }
+        .voice-bar:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+        .voice-bar:nth-child(5) { height: 12px; animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+
+        /* Bottom CTA */
+        .hook-cta {
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .cta-text {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
 
         .scroll-indicator {
@@ -312,6 +528,28 @@
 
         /* Mobile */
         @media (max-width: 768px) {
+            .notification-container {
+                height: 600px;
+            }
+
+            .notification {
+                min-width: 250px;
+                max-width: 320px;
+                font-size: 0.9rem;
+            }
+
+            .notification:nth-child(odd) {
+                left: 35% !important;
+            }
+
+            .notification:nth-child(even) {
+                left: 65% !important;
+            }
+
+            .cta-text {
+                font-size: 1.4rem;
+            }
+            
             .proof-card {
                 transform: none !important;
             }
@@ -327,7 +565,7 @@
     </style>
 </head>
 <body>
-    <!-- Opening Hook -->
+    <!-- Opening Hook with Notification Stream -->
     <section class="opening-hook">
         <div class="hook-content">
             <!-- Logo -->
@@ -337,40 +575,129 @@
                 </div>
             </div>
 
-            <!-- Who It's For -->
-            <p style="color: white; font-size: 1.5rem; font-weight: 600; margin: 20px 0 10px 0;">
-                For South Africans building outside the system
-            </p>
-
-            <!-- What We Offer -->
-            <p style="color: white; font-size: 1.2rem; font-weight: 300; margin-bottom: 40px; font-style: italic;">
-                Sharing stories, strategies, and savage humour for truly thriving
-            </p>
-
-            <h1>Stop Waiting.<br>Start Sharing.</h1>
-
-            <!-- What SA REJECTS Actually Do -->
-            <div style="margin: 40px 0; padding: 30px; background: rgba(255,255,255,0.1); border-left: 4px solid #ffeb3b; transform: rotate(-0.5deg);">
-                <p style="color: white; font-size: 1.15rem; line-height: 1.8; margin: 0;">
-                    <strong style="color: #ffeb3b;">Three degrees serving coffee?</strong> Now invoicing from your kitchen table.<br>
-                    <strong style="color: #ffeb3b;">Wrong BEE score?</strong> Your Canadian clients don't care.<br>
-                    <strong style="color: #ffeb3b;">"Too old" at 55?</strong> Teaching your expertise online for dollars.<br>
-                    <strong style="color: #ffeb3b;">Single mom with bills?</strong> Building a business between school runs.<br>
-                    <strong style="color: #ffeb3b;">Retrenched last year?</strong> Earning more than your old boss.<br>
-                    <strong style="color: #ffeb3b;">Rejected everywhere?</strong> Building anyway. Sharing what works. Never alone.
-                </p>
+            <!-- Subtitle -->
+            <div class="subtitle-strip">
+                <p>For South Africans building outside the system</p>
+                <p>Sharing stories, strategies, and savage humour for truly thriving</p>
             </div>
 
-            <p class="hook-subtitle" style="margin-top: 30px;">
-                We don't wait for permission. We don't ask for approval.<br>
-                We build. We share. We thrive anyway.
-            </p>
+            <!-- Notification Stream -->
+            <div class="notification-container">
+                <!-- Payment Notification -->
+                <div class="notification payment">
+                    <div class="notification-header">
+                        <span class="notification-app">💬 WhatsApp</span>
+                        <span class="notification-time">now</span>
+                    </div>
+                    <div class="notification-content">
+                        Payment received <span class="amount">R 15,000</span> ✓✓<br>
+                        <small style="color: #666;">From: Canadian Client</small>
+                    </div>
+                </div>
+
+                <!-- Success Story -->
+                <div class="notification success">
+                    <div class="notification-header">
+                        <span class="notification-app">🔥 SA REJECTS</span>
+                        <span class="notification-time">2 min</span>
+                    </div>
+                    <div class="notification-content">
+                        <strong>Lerato:</strong> "Your Upwork template just landed me <span class="highlight">$2,500!</span> Shot bru! 🙏"
+                    </div>
+                </div>
+
+                <!-- Opportunity Share -->
+                <div class="notification opportunity">
+                    <div class="notification-header">
+                        <span class="notification-app">📢 New Drop</span>
+                        <span class="notification-time">5 min</span>
+                    </div>
+                    <div class="notification-content">
+                        <strong>Ahmed shared:</strong> "German tax guide for consultants - no more confusion 🎯"
+                    </div>
+                </div>
+
+                <!-- Voice Note -->
+                <div class="notification payment">
+                    <div class="notification-header">
+                        <span class="notification-app">🎤 Voice Note</span>
+                        <span class="notification-time">12 min</span>
+                    </div>
+                    <div class="notification-content">
+                        <strong>Sarah:</strong> "Guys, the homeschool resources worked!"
+                        <div class="voice-note">
+                            <div class="voice-wave">
+                                <div class="voice-bar"></div>
+                                <div class="voice-bar"></div>
+                                <div class="voice-bar"></div>
+                                <div class="voice-bar"></div>
+                                <div class="voice-bar"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #666;">0:47</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template Share -->
+                <div class="notification help">
+                    <div class="notification-header">
+                        <span class="notification-app">📎 File Shared</span>
+                        <span class="notification-time">23 min</span>
+                    </div>
+                    <div class="notification-content">
+                        <strong>Precious dropped:</strong><br>
+                        "Cold_Email_Template_UK.docx"<br>
+                        <small style="color: #666;">This one converts at 30% 🚀</small>
+                    </div>
+                </div>
+
+                <!-- Success Update -->
+                <div class="notification success">
+                    <div class="notification-header">
+                        <span class="notification-app">💰 Invoiced</span>
+                        <span class="notification-time">1 hr</span>
+                    </div>
+                    <div class="notification-content">
+                        "Just invoiced <span class="amount">$3,500</span> using the rate sheet you shared. They didn't even negotiate!"
+                    </div>
+                </div>
+
+                <!-- Community Win -->
+                <div class="notification opportunity">
+                    <div class="notification-header">
+                        <span class="notification-app">🎉 Community Win</span>
+                        <span class="notification-time">2 hr</span>
+                    </div>
+                    <div class="notification-content">
+                        <strong>Michael:</strong> "5 Rejects just landed the same UK client. We're all eating! 🍞"
+                    </div>
+                </div>
+
+                <!-- New Member -->
+                <div class="notification help">
+                    <div class="notification-header">
+                        <span class="notification-app">👋 New Reject</span>
+                        <span class="notification-time">3 hr</span>
+                    </div>
+                    <div class="notification-content">
+                        <strong>Thabo (Retrenched Engineer):</strong><br>
+                        "Where do I start? Got skills, no system access"<br>
+                        <small style="color: #25D366;">17 Rejects typing...</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="hook-cta">
+                <p class="cta-text">We don't wait for permission. We don't ask for approval.<br>We build. We share. We thrive anyway.</p>
+                <a href="#exchange" class="cta-button">Get In The Stream</a>
+            </div>
         </div>
         <div class="scroll-indicator">↓</div>
     </section>
 
     <!-- Give and Take Section - NEW -->
-    <section style="background: #f5f2ed; padding: 60px 20px; position: relative;">
+    <section id="exchange" style="background: #f5f2ed; padding: 60px 20px; position: relative;">
         <div class="container" style="max-width: 1000px; margin: 0 auto;">
             <h2 style="font-size: 2.5rem; font-weight: 900; text-align: center; margin-bottom: 20px; transform: rotate(-0.5deg);">
                 The Exchange
