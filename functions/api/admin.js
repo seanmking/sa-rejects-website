@@ -10,7 +10,7 @@ export async function onRequestGet(context) {
   
   // BASIC AUTH - Replace with your own credentials
   const AUTH_USER = 'admin';
-  const AUTH_PASS = 'sarejects2024'; // CHANGE THIS!
+  const AUTH_PASS = 'ChangeThisToYourPassword123!'; // CHANGE THIS!
   
   // Check basic auth
   const authorization = request.headers.get('Authorization');
@@ -251,7 +251,7 @@ export async function onRequestGet(context) {
                 <td>${submission.email}</td>
                 <td>${submission.type}</td>
                 <td>${submission.description}</td>
-                <td>${submission.fileKey ? `<a href="${submission.fileUrl || '#'}" target="_blank">View</a>` : 'No file'}</td>
+                <td>${submission.fileKey ? `<a href="/api/download?file=${encodeURIComponent(submission.fileKey)}" target="_blank">Download</a>` : 'No file'}</td>
             </tr>
           `;
         }
