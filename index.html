@@ -57,7 +57,7 @@
 
         .logo-badge {
             background: #f5f2ed;
-            padding: 15px;
+            padding: 10px;
             border-radius: 15px;
             display: inline-block;
             position: relative;
@@ -74,7 +74,7 @@
         }
 
         .logo-badge img {
-            max-width: 260px;
+            max-width: 240px;
             width: 100%;
             height: auto;
             display: block;
@@ -84,6 +84,7 @@
         /* Subtitle */
         .subtitle-strip {
             color: white;
+            margin-top: 15px;
             margin-bottom: 40px;
         }
 
@@ -103,10 +104,10 @@
         /* Notification Stream Container */
         .notification-container {
             position: relative;
-            height: 500px;
+            height: 420px;
             width: 100%;
             max-width: 900px;
-            margin: 0 auto;
+            margin: 0 auto 60px;
         }
 
         /* Scroll hint - hidden on desktop */
@@ -127,6 +128,15 @@
             opacity: 0;
             animation: slideInNotification 0.5s ease-out forwards;
             border-left: 4px solid #25D366;
+            transition: z-index 0.2s, transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        /* Hover effect to bring notification to front */
+        .notification:hover {
+            z-index: 50 !important;
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
         }
 
         @keyframes slideInNotification {
@@ -192,53 +202,58 @@
             font-weight: 700;
         }
 
-        /* Positioning for notifications */
+        /* Positioning for notifications - note: nth-child(1) is scroll-hint */
         .notification:nth-child(1) {
-            left: 20%;
-            top: 10px;
-            animation-delay: 0.5s;
+            display: none; /* This is the scroll-hint, not a notification */
         }
 
         .notification:nth-child(2) {
-            left: 70%;
-            top: 40px;
-            animation-delay: 1s;
+            left: 50%;
+            top: 20px;
+            animation-delay: 0.5s;
+            z-index: 2;
         }
 
         .notification:nth-child(3) {
-            left: 50%;
-            top: 100px;
-            animation-delay: 1.5s;
+            left: 75%;
+            top: 90px;
+            animation-delay: 1s;
+            z-index: 3;
         }
 
         .notification:nth-child(4) {
             left: 25%;
-            top: 160px;
-            animation-delay: 2s;
+            top: 100px;
+            animation-delay: 1.5s;
+            z-index: 4;
         }
 
         .notification:nth-child(5) {
-            left: 75%;
-            top: 200px;
-            animation-delay: 2.5s;
+            left: 50%;
+            top: 170px;
+            animation-delay: 2s;
+            z-index: 5;
         }
 
         .notification:nth-child(6) {
-            left: 45%;
-            top: 270px;
-            animation-delay: 3s;
+            left: 75%;
+            top: 240px;
+            animation-delay: 2.5s;
+            z-index: 6;
         }
 
         .notification:nth-child(7) {
-            left: 30%;
-            top: 340px;
-            animation-delay: 3.5s;
+            left: 25%;
+            top: 250px;
+            animation-delay: 3s;
+            z-index: 7;
         }
 
         .notification:nth-child(8) {
-            left: 65%;
-            top: 380px;
-            animation-delay: 4s;
+            left: 50%;
+            top: 320px;
+            animation-delay: 3.5s;
+            z-index: 8;
         }
 
         /* Pulse animation for recent notifications */
@@ -287,37 +302,6 @@
             50% { transform: scaleY(1.5); }
         }
 
-        /* Bottom CTA */
-        .hook-cta {
-            margin-top: 40px;
-            padding: 20px;
-        }
-
-        .cta-text {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #1a1a1a;
-            color: white;
-            padding: 18px 40px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-        }
 
         .scroll-indicator {
             position: absolute;
@@ -327,6 +311,8 @@
             color: white;
             font-size: 2rem;
             animation: bounce 2s infinite;
+            z-index: 100;
+            pointer-events: none;
         }
 
         @keyframes bounce {
@@ -538,9 +524,12 @@
                 max-height: 500px;
                 overflow-y: auto;
                 overflow-x: hidden;
-                padding: 10px;
+                padding: 15px;
                 margin-bottom: 30px;
                 -webkit-overflow-scrolling: touch;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
             }
 
             /* Scrollbar styling for mobile */
@@ -576,15 +565,16 @@
 
             .notification {
                 position: relative !important;
-                min-width: 90%;
-                max-width: 90%;
-                margin: 0 auto 15px !important;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 0 15px 0 !important;
                 left: 0 !important;
                 top: 0 !important;
                 transform: none !important;
                 font-size: 0.9rem;
                 opacity: 1 !important;
                 animation: slideInMobile 0.3s ease-out !important;
+                box-sizing: border-box;
             }
 
             /* Stagger animations on mobile */
@@ -619,13 +609,13 @@
             }
 
             .logo-badge {
-                padding: 12px;
+                padding: 8px;
                 border-radius: 12px;
                 box-shadow: 0 4px 15px rgba(0,0,0,0.25);
             }
 
             .logo-badge img {
-                max-width: 180px;
+                max-width: 160px;
             }
 
             .subtitle-strip {
@@ -640,19 +630,6 @@
                 font-size: 1rem;
             }
 
-            .hook-cta {
-                margin-top: 20px;
-            }
-
-            .cta-text {
-                font-size: 1.3rem;
-                line-height: 1.3;
-            }
-
-            .cta-button {
-                padding: 15px 30px;
-                font-size: 1.1rem;
-            }
             
             .proof-card {
                 transform: none !important;
@@ -792,11 +769,6 @@
                 </div>
             </div>
 
-            <!-- CTA -->
-            <div class="hook-cta">
-                <p class="cta-text">We don't wait for permission. We don't ask for approval.<br>We build. We share. We thrive anyway.</p>
-                <a href="#exchange" class="cta-button">Get In The Stream</a>
-            </div>
         </div>
         <div class="scroll-indicator">↓</div>
     </section>
