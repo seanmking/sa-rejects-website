@@ -84,11 +84,54 @@ export async function onRequestPost(context) {
         expirationTtl: 60 // Expires after 60 seconds
       });
 
-      // Optional: Send notification email to admin
+      // Send notification email to admin using MailChannels
       if (env.ADMIN_EMAIL) {
-        // Notification can be sent via Cloudflare Email Workers
-        // For now, the admin can check the dashboard at /api/admin
-        console.log(`New subscriber: ${email}`);
+        try {
+          const emailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              personalizations: [
+                {
+                  to: [{ email: env.ADMIN_EMAIL }],
+                },
+              ],
+              from: {
+                email: 'noreply@sarejects.co.za',
+                name: 'SA REJECTS',
+              },
+              subject: '🔥 New SA REJECT joined the movement!',
+              content: [
+                {
+                  type: 'text/html',
+                  value: `
+                    <div style="font-family: -apple-system, sans-serif; max-width: 600px; margin: 0 auto;">
+                      <h2 style="color: #ff3333;">New Reject Alert!</h2>
+                      <p><strong>Email:</strong> ${email}</p>
+                      <p><strong>Time:</strong> ${new Date().toISOString()}</p>
+                      <p><strong>Source:</strong> Website signup</p>
+                      <p><strong>IP:</strong> ${ip}</p>
+                      <hr style="border: 1px solid #eee; margin: 20px 0;">
+                      <p style="color: #666; font-size: 14px;">
+                        Check your admin dashboard for all subscribers:<br>
+                        <a href="${env.SITE_URL || 'https://sarejects.co.za'}/api/admin">View Dashboard</a>
+                      </p>
+                    </div>
+                  `,
+                },
+              ],
+            }),
+          });
+          
+          if (!emailResponse.ok) {
+            console.error('Failed to send admin notification:', await emailResponse.text());
+          }
+        } catch (emailError) {
+          console.error('Error sending admin notification:', emailError);
+          // Don't fail the subscription if email notification fails
+        }
       }
 
       return new Response(JSON.stringify({ 

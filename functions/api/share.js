@@ -190,6 +190,57 @@ export async function onRequestPost(context) {
       const submissions = currentList ? JSON.parse(currentList) : [];
       submissions.push(submissionData.id);
       await env.SUBMISSIONS_KV.put(listKey, JSON.stringify(submissions));
+      
+      // Send notification email to admin using MailChannels
+      if (env.ADMIN_EMAIL) {
+        try {
+          const emailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              personalizations: [
+                {
+                  to: [{ email: env.ADMIN_EMAIL }],
+                },
+              ],
+              from: {
+                email: 'noreply@sarejects.co.za',
+                name: 'SA REJECTS',
+              },
+              subject: `📎 New ${type} submission from SA REJECT!`,
+              content: [
+                {
+                  type: 'text/html',
+                  value: `
+                    <div style="font-family: -apple-system, sans-serif; max-width: 600px; margin: 0 auto;">
+                      <h2 style="color: #ff3333;">New Submission Alert!</h2>
+                      <p><strong>Type:</strong> ${type}</p>
+                      <p><strong>Email:</strong> ${email}</p>
+                      <p><strong>Story:</strong> ${story || 'No story provided'}</p>
+                      ${file ? `<p><strong>File:</strong> ${file.name} (${(file.size / 1024).toFixed(2)} KB)</p>` : ''}
+                      <p><strong>Time:</strong> ${new Date().toISOString()}</p>
+                      <hr style="border: 1px solid #eee; margin: 20px 0;">
+                      <p style="color: #666; font-size: 14px;">
+                        View and download in your admin dashboard:<br>
+                        <a href="${env.SITE_URL || 'https://sarejects.co.za'}/api/admin">View Dashboard</a>
+                      </p>
+                    </div>
+                  `,
+                },
+              ],
+            }),
+          });
+          
+          if (!emailResponse.ok) {
+            console.error('Failed to send admin notification:', await emailResponse.text());
+          }
+        } catch (emailError) {
+          console.error('Error sending admin notification:', emailError);
+          // Don't fail the submission if email notification fails
+        }
+      }
     }
 
     // Success response
