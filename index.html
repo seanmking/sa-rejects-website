@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA REJECTS - Share What Works</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #1a1a1a;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Opening Hook - Full Screen */
+        .opening-hook {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff3333 0%, #ff6b6b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opening-hook::before {
+            content: "REJECTED";
+            position: absolute;
+            font-size: 20vw;
+            font-weight: 900;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+            white-space: nowrap;
+        }
+
+        .hook-content {
+            text-align: center;
+            padding: 20px;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Logo Section */
+        .logo-container {
+            margin-bottom: 30px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .logo-badge {
+            background: #f5f2ed;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            position: relative;
+            transform: rotate(-2deg);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            border: 3px solid #1a1a1a;
+        }
+
+        .logo-badge img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .logo-badge::before {
+            content: "🇿🇦";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 24px;
+            transform: rotate(15deg);
+        }
+
+        /* What We Are Strip - REMOVED */
+
+        .hook-content h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            color: white;
+            line-height: 0.9;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        .hook-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: white;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* The Real Deal Section */
+        .real-deal {
+            background: #f5f2ed;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 40px;
+            transform: rotate(-0.5deg);
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .proof-card {
+            background: white;
+            padding: 25px;
+            border: 3px solid #1a1a1a;
+            position: relative;
+            transform: rotate(calc(var(--rotation) * 0.5deg));
+            box-shadow: 5px 5px 0 #1a1a1a;
+        }
+
+        .proof-card::before {
+            content: "💰";
+            position: absolute;
+            top: -15px;
+            right: 10px;
+            font-size: 2rem;
+            transform: rotate(15deg);
+        }
+
+        .proof-amount {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #25D366;
+            margin-bottom: 10px;
+        }
+
+        .proof-story {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .proof-person {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: bold;
+        }
+
+        /* The Exchange Section */
+        .exchange-section {
+            background: #1a1a1a;
+            color: white;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exchange-section::before {
+            content: "SHARING";
+            position: absolute;
+            font-size: 15vw;
+            font-weight: 900;
+            opacity: 0.05;
+            top: 50%;
+            left: -10%;
+            transform: translateY(-50%) rotate(-10deg);
+        }
+
+        .exchange-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .exchange-item {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .exchange-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 2rem;
+            color: #ff3333;
+        }
+
+        .exchange-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .exchange-desc {
+            font-size: 1rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        /* The Ask Section */
+        .ask-section {
+            background: #ffeb3b;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            transform: rotate(-0.5deg);
+            margin: 40px 0;
+        }
+
+        .ask-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.02) 10px,
+                rgba(0,0,0,0.02) 20px
+            );
+        }
+
+        .ask-content {
+            position: relative;
+            z-index: 2;
+            transform: rotate(0.5deg);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ask-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1;
+        }
+
+        .ask-list {
+            list-style: none;
+            font-size: 1.2rem;
+            margin: 30px 0;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ask-list li {
+            padding: 10px 0;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .ask-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #25D366;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-message {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .proof-card {
+                transform: none !important;
+            }
+        }
+
+        /* Rotation variations */
+        .proof-card:nth-child(1) { --rotation: 1; }
+        .proof-card:nth-child(2) { --rotation: -1.5; }
+        .proof-card:nth-child(3) { --rotation: 0.8; }
+        .proof-card:nth-child(4) { --rotation: -1; }
+        .proof-card:nth-child(5) { --rotation: 1.2; }
+        .proof-card:nth-child(6) { --rotation: -0.7; }
+    </style>
+</head>
+<body>
+    <!-- Opening Hook -->
+    <section class="opening-hook">
+        <div class="hook-content">
+            <!-- Logo -->
+            <div class="logo-container">
+                <div class="logo-badge">
+                    <img src="logo.png" alt="SA REJECTS">
+                </div>
+            </div>
+
+            <!-- Who It's For -->
+            <p style="color: white; font-size: 1.5rem; font-weight: 600; margin: 20px 0 10px 0;">
+                For South Africans building outside the system
+            </p>
+
+            <!-- What We Offer -->
+            <p style="color: white; font-size: 1.2rem; font-weight: 300; margin-bottom: 40px; font-style: italic;">
+                Sharing stories, strategies, and savage humour for truly thriving
+            </p>
+
+            <h1>Stop Waiting.<br>Start Sharing.</h1>
+
+            <!-- What SA REJECTS Actually Do -->
+            <div style="margin: 40px 0; padding: 30px; background: rgba(255,255,255,0.1); border-left: 4px solid #ffeb3b; transform: rotate(-0.5deg);">
+                <p style="color: white; font-size: 1.15rem; line-height: 1.8; margin: 0;">
+                    <strong style="color: #ffeb3b;">Three degrees serving coffee?</strong> Now invoicing from your kitchen table.<br>
+                    <strong style="color: #ffeb3b;">Wrong BEE score?</strong> Your Canadian clients don't care.<br>
+                    <strong style="color: #ffeb3b;">"Too old" at 55?</strong> Teaching your expertise online for dollars.<br>
+                    <strong style="color: #ffeb3b;">Single mom with bills?</strong> Building a business between school runs.<br>
+                    <strong style="color: #ffeb3b;">Retrenched last year?</strong> Earning more than your old boss.<br>
+                    <strong style="color: #ffeb3b;">Rejected everywhere?</strong> Building anyway. Sharing what works. Never alone.
+                </p>
+            </div>
+
+            <p class="hook-subtitle" style="margin-top: 30px;">
+                We don't wait for permission. We don't ask for approval.<br>
+                We build. We share. We thrive anyway.
+            </p>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Give and Take Section - NEW -->
+    <section style="background: #f5f2ed; padding: 60px 20px; position: relative;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto;">
+            <h2 style="font-size: 2.5rem; font-weight: 900; text-align: center; margin-bottom: 20px; transform: rotate(-0.5deg);">
+                The Exchange
+            </h2>
+            <p style="text-align: center; font-size: 1.3rem; margin-bottom: 40px;">
+                You give what works. You take what helps. We all build.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <!-- Share Your Wins -->
+                <div style="background: white; padding: 30px; border: 3px solid #1a1a1a; transform: rotate(-0.5deg); box-shadow: 5px 5px 0 #1a1a1a;">
+                    <h3 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 15px; color: #25D366;">
+                        DROP YOUR WINS
+                    </h3>
+                    <p style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 20px;">
+                        Got a template that works? A rate that surprised you? A platform that actually pays? A hack that saves hours?
+                    </p>
+                    <p style="font-size: 1rem; margin-bottom: 20px; font-weight: bold;">
+                        Share it. Help the next Reject skip your mistakes.
+                    </p>
+                    <a href="#" style="display: inline-block; padding: 15px 30px; background: #1a1a1a; color: white; text-decoration: none; font-weight: 900; text-transform: uppercase; transition: all 0.3s ease;">
+                        Share What Works
+                    </a>
+                </div>
+                
+                <!-- Get The Goods -->
+                <div style="background: white; padding: 30px; border: 3px solid #1a1a1a; transform: rotate(0.5deg); box-shadow: 5px 5px 0 #1a1a1a;">
+                    <h3 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 15px; color: #ff3333;">
+                        GET THE GOODS
+                    </h3>
+                    <p style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 20px;">
+                        Weekly drops of what's actually working. Real templates. Real rates. Real platforms. Zero fluff.
+                    </p>
+                    <form style="margin-top: 25px;">
+                        <input type="email" placeholder="your@email.com" style="width: 100%; padding: 12px; border: 2px solid #1a1a1a; margin-bottom: 10px; font-family: 'Courier New', monospace; font-size: 16px;">
+                        <button type="submit" style="width: 100%; padding: 12px; background: #ff3333; color: white; border: none; font-weight: 900; font-size: 16px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;">
+                            Get Weekly Tactics
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px; font-size: 1.1rem; opacity: 0.8;">
+                No motivational quotes. No courses to sell. Just what works.
+            </p>
+        </div>
+    </section>
+
+    <!-- The Real Deal -->
+    <section class="real-deal">
+        <div class="container">
+            <h2 class="section-title">Stories from Outside the System</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; opacity: 0.8;">
+                Real Rejects. Real Lives. Real Wins.
+            </p>
+            
+            <div class="proof-grid">
+                <div class="proof-card">
+                    <div class="proof-amount">$3,500</div>
+                    <p class="proof-story">
+                        "Rejected from every agency for being 'too junior'. 
+                        Now designing for Silicon Valley startups from my bedroom in Soweto."
+                    </p>
+                    <p class="proof-person">- Lerato, 24, Graphic Designer</p>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-amount">R127,000</div>
+                    <p class="proof-story">
+                        "They said I needed tender experience. 
+                        I said fuck it and started consulting for German companies who just want results."
+                    </p>
+                    <p class="proof-person">- Ahmed, 31, Engineer</p>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-amount">£2,100</div>
+                    <p class="proof-story">
+                        "Three degrees, zero callbacks. 
+                        Started copywriting at 2am for UK clients. 
+                        They don't even know what BEE is."
+                    </p>
+                    <p class="proof-person">- Precious, 27, Writer</p>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-amount">Freedom</div>
+                    <p class="proof-story">
+                        "They said my kid needed Ritalin and special school. 
+                        We chose homeschooling and nature. 
+                        He's thriving, building apps at 14."
+                    </p>
+                    <p class="proof-person">- Sarah, 41, Homeschool Mom</p>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-amount">Dignity</div>
+                    <p class="proof-story">
+                        "Dad chose his own cancer path. No chemo. 
+                        The doctors were furious. We had 8 beautiful months. 
+                        His choice. His terms."
+                    </p>
+                    <p class="proof-person">- Michael, 35, Son</p>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-amount">R15,000/month</div>
+                    <p class="proof-story">
+                        "Sold the Sandton house. Moved to a small flat. 
+                        Less stress, more life. 
+                        They think we're crazy. We've never been happier."
+                    </p>
+                    <p class="proof-person">- The Naidoos, Simple Living</p>
+                </div>
+            </div>
+
+            <p style="font-size: 1.3rem; text-align: center; font-weight: bold;">
+                They're not special. They're not connected.<br>
+                Just tired of waiting for permission.<br>
+                <span style="font-weight: normal; font-size: 1.1rem;">Young hustlers. Single moms. Retrenched veterans. All building anyway.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- The Exchange -->
+    <section class="exchange-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Here's What We Actually Share</h2>
+            
+            <div class="exchange-grid">
+                <div class="exchange-item">
+                    <h3 class="exchange-title">The Templates</h3>
+                    <p class="exchange-desc">
+                        The RFQ response that actually wins. 
+                        The homeschool curriculum that works. 
+                        The alternative treatment research doc.
+                    </p>
+                </div>
+                
+                <div class="exchange-item">
+                    <h3 class="exchange-title">The Strategies</h3>
+                    <p class="exchange-desc">
+                        How to invoice internationally from SA. 
+                        Education paths that don't follow the script. 
+                        Healthcare choices on your own terms.
+                    </p>
+                </div>
+                
+                <div class="exchange-item">
+                    <h3 class="exchange-title">The Networks</h3>
+                    <p class="exchange-desc">
+                        Mine procurement contacts who answer. 
+                        Homeschool communities that support. 
+                        Doctors who respect your choices.
+                    </p>
+                </div>
+                
+                <div class="exchange-item">
+                    <h3 class="exchange-title">The Real Talk</h3>
+                    <p class="exchange-desc">
+                        What works vs what they insist should work. 
+                        Choosing dignity over protocol. 
+                        Success on your terms, not theirs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Ask -->
+    <section class="ask-section">
+        <div class="ask-content">
+            <h2 class="ask-title">We're Not Asking for Much</h2>
+            
+            <ul class="ask-list">
+                <li>Share one thing that actually worked</li>
+                <li>Drop that template you use</li>
+                <li>Tell us your real invoice numbers</li>
+                <li>Help the next reject skip your mistakes</li>
+                <li>Laugh at the absurdity with us</li>
+            </ul>
+
+            <p style="font-size: 1.2rem; margin-top: 30px; font-weight: bold;">
+                No motivational quotes.<br>
+                No "journey to excellence" bullshit.<br>
+                Just what works.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-message">
+            Too strong for the system. Too busy for bitterness.<br>
+            Building anyway since 2024.
+        </p>
+        <p style="opacity: 0.6; font-size: 0.9rem; margin-top: 20px;">
+            SA REJECTS · Not a charity · Not a movement · Just builders sharing what works
+        </p>
+    </footer>
+</body>
+</html>
