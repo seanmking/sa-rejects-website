@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SA REJECTS - Share What Works</title>
+    <script>
+        // COMING SOON MODE - Set to true to enable password protection
+        const COMING_SOON_MODE = true; // Change to false when ready to launch
+        
+        // Check authentication
+        if (COMING_SOON_MODE && sessionStorage.getItem('sa-rejects-auth') !== 'true') {
+            // Redirect to coming soon page
+            window.location.href = '/coming-soon.html';
+        }
+    </script>
     <style>
         * {
             margin: 0;

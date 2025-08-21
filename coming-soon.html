@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA REJECTS - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #ff3333 0%, #ff6b6b 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background pattern */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
+            pointer-events: none;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-badge {
+            background: #f5f2ed;
+            padding: 15px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 40px;
+            transform: rotate(-2deg);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            border: 3px solid #1a1a1a;
+        }
+
+        .logo-badge img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            transform: rotate(-1deg);
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        .password-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .password-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .password-input {
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .password-input:focus {
+            outline: 3px solid #25D366;
+            outline-offset: 2px;
+        }
+
+        .password-button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .password-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .error-message {
+            color: #ffeb3b;
+            margin-top: 10px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .coming-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .notify-form {
+            margin-top: 40px;
+            display: none;
+        }
+
+        .email-input {
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.9);
+            color: #1a1a1a;
+            width: 100%;
+            max-width: 350px;
+            margin-bottom: 15px;
+        }
+
+        .notify-button {
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notify-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .logo-badge img {
+                max-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-badge">
+            <img src="logo.png" alt="SA REJECTS">
+        </div>
+        
+        <h1>COMING SOON</h1>
+        
+        <p class="coming-text">The Revolution Starts Here</p>
+        
+        <p class="tagline">
+            For South Africans building outside the system<br>
+            Sharing stories, strategies, and savage humour for truly thriving
+        </p>
+
+        <div class="password-box">
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                🔒 Early access for SA REJECTS only
+            </p>
+            <form class="password-form" id="passwordForm">
+                <input 
+                    type="password" 
+                    class="password-input" 
+                    placeholder="Enter password"
+                    id="passwordInput"
+                    required
+                >
+                <button type="submit" class="password-button">
+                    ENTER THE MOVEMENT
+                </button>
+                <div class="error-message" id="errorMessage">
+                    Wrong password, boet. Try again.
+                </div>
+            </form>
+        </div>
+
+        <!-- Optional: Email notification form (hidden by default) -->
+        <div class="notify-form" id="notifyForm">
+            <p style="margin-bottom: 15px;">Get notified when we launch:</p>
+            <form id="emailNotifyForm">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="your@email.com"
+                    required
+                >
+                <button type="submit" class="notify-button">
+                    NOTIFY ME
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Password to access the site
+        const SITE_PASSWORD = 'rejects2024'; // Change this to whatever you want
+        
+        // Check if already authenticated
+        if (sessionStorage.getItem('sa-rejects-auth') === 'true') {
+            window.location.href = '/index.html';
+        }
+        
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('passwordInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (password === SITE_PASSWORD) {
+                // Set session auth
+                sessionStorage.setItem('sa-rejects-auth', 'true');
+                // Redirect to main site
+                window.location.href = '/index.html';
+            } else {
+                // Show error
+                errorMessage.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                
+                // Hide error after 3 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Optional: Handle email notification
+        document.getElementById('emailNotifyForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = e.target.querySelector('input[type="email"]').value;
+            
+            try {
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    body: new FormData(e.target)
+                });
+                
+                if (response.ok) {
+                    e.target.innerHTML = '<p style="color: #25D366; font-size: 1.2rem;">✓ We\'ll let you know!</p>';
+                }
+            } catch (error) {
+                console.error('Subscription error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

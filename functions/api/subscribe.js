@@ -99,7 +99,7 @@ export async function onRequestPost(context) {
                 },
               ],
               from: {
-                email: 'noreply@sarejects.co.za',
+                email: 'noreply@sarejects.com',
                 name: 'SA REJECTS',
               },
               subject: '🔥 New SA REJECT joined the movement!',
@@ -116,7 +116,7 @@ export async function onRequestPost(context) {
                       <hr style="border: 1px solid #eee; margin: 20px 0;">
                       <p style="color: #666; font-size: 14px;">
                         Check your admin dashboard for all subscribers:<br>
-                        <a href="${env.SITE_URL || 'https://sarejects.co.za'}/api/admin">View Dashboard</a>
+                        <a href="${env.SITE_URL || 'https://sarejects.com'}/api/admin">View Dashboard</a>
                       </p>
                     </div>
                   `,
