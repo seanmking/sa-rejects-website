@@ -1,0 +1,37 @@
+# Cloudflare Pages Configuration for SA REJECTS
+# This file configures KV namespaces and R2 buckets for the site
+
+name = "sa-rejects-website"
+compatibility_date = "2024-01-01"
+
+# KV Namespaces for storing emails and submission metadata
+# You need to create these in your Cloudflare dashboard first
+[[kv_namespaces]]
+binding = "EMAILS"
+id = "YOUR_EMAILS_KV_ID" # Replace with actual KV namespace ID
+
+[[kv_namespaces]]
+binding = "SUBMISSIONS_KV"
+id = "YOUR_SUBMISSIONS_KV_ID" # Replace with actual KV namespace ID
+
+# R2 Bucket for file storage
+# You need to create this bucket in your Cloudflare dashboard first
+[[r2_buckets]]
+binding = "SUBMISSIONS_BUCKET"
+bucket_name = "sa-rejects-submissions" # Replace with your actual bucket name
+
+# Environment variables
+[vars]
+ADMIN_EMAIL = "" # Optional: Your admin email for notifications
+R2_PUBLIC_URL = "" # Optional: Public URL for R2 bucket if configured
+
+# Build configuration
+[build]
+command = ""
+cwd = ""
+watch_paths = ["functions/**/*.js"]
+
+# Development settings
+[dev]
+port = 8788
+local_protocol = "http"
