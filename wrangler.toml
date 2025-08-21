@@ -22,8 +22,9 @@ bucket_name = "sa-rejects-submissions" # Replace with your actual bucket name
 
 # Environment variables
 [vars]
-ADMIN_EMAIL = "" # Optional: Your admin email for notifications
+ADMIN_EMAIL = "sean@futuresgroup.co.za" # Your admin email for notifications
 R2_PUBLIC_URL = "" # Optional: Public URL for R2 bucket if configured
+SITE_URL = "https://sarejects.co.za" # Your domain
 
 # Build configuration
 [build]

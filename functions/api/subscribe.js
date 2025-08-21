@@ -86,7 +86,9 @@ export async function onRequestPost(context) {
 
       // Optional: Send notification email to admin
       if (env.ADMIN_EMAIL) {
-        // You can implement email notification here using Cloudflare Email Workers
+        // Notification can be sent via Cloudflare Email Workers
+        // For now, the admin can check the dashboard at /api/admin
+        console.log(`New subscriber: ${email}`);
       }
 
       return new Response(JSON.stringify({ 
