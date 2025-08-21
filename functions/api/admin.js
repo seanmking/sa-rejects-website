@@ -10,7 +10,7 @@ export async function onRequestGet(context) {
   
   // BASIC AUTH - Replace with your own credentials
   const AUTH_USER = 'admin';
-  const AUTH_PASS = 'ChangeThisToYourPassword123!'; // CHANGE THIS!
+  const AUTH_PASS = 'Kawai@1607'; // CHANGE THIS!
   
   // Check basic auth
   const authorization = request.headers.get('Authorization');
