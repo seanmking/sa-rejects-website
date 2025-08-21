@@ -225,20 +225,26 @@
             </form>
         </div>
 
-        <!-- Optional: Email notification form (hidden by default) -->
-        <div class="notify-form" id="notifyForm">
-            <p style="margin-bottom: 15px;">Get notified when we launch:</p>
+        <!-- Waitlist signup form -->
+        <div class="notify-form" id="notifyForm" style="display: block; margin-top: 50px;">
+            <div style="background: rgba(0,0,0,0.2); padding: 2px 0; margin-bottom: 20px;">
+                <p style="font-size: 1.2rem; font-weight: 700;">— OR —</p>
+            </div>
+            <p style="margin-bottom: 15px; font-size: 1.1rem;">Join the waitlist to get notified when we launch:</p>
             <form id="emailNotifyForm">
                 <input 
                     type="email" 
+                    name="email"
                     class="email-input" 
                     placeholder="your@email.com"
                     required
                 >
+                <input type="hidden" name="website" value=""> <!-- Honeypot for spam -->
                 <button type="submit" class="notify-button">
-                    NOTIFY ME
+                    JOIN THE WAITLIST
                 </button>
             </form>
+            <p id="waitlistMessage" style="display: none; margin-top: 15px; color: #25D366; font-size: 1.1rem; font-weight: 600;"></p>
         </div>
     </div>
 
@@ -274,11 +280,16 @@
             }
         });
 
-        // Optional: Handle email notification
-        document.getElementById('emailNotifyForm')?.addEventListener('submit', async function(e) {
+        // Handle waitlist signup
+        document.getElementById('emailNotifyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const email = e.target.querySelector('input[type="email"]').value;
+            const button = e.target.querySelector('button');
+            const originalText = button.textContent;
+            const messageDiv = document.getElementById('waitlistMessage');
+            
+            button.disabled = true;
+            button.textContent = 'ADDING YOU...';
             
             try {
                 const response = await fetch('/api/subscribe', {
@@ -286,11 +297,39 @@
                     body: new FormData(e.target)
                 });
                 
+                const result = await response.json();
+                
                 if (response.ok) {
-                    e.target.innerHTML = '<p style="color: #25D366; font-size: 1.2rem;">✓ We\'ll let you know!</p>';
+                    // Show success message
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.color = '#25D366';
+                    messageDiv.textContent = '✓ You\'re on the list! We\'ll notify you when we launch.';
+                    
+                    // Clear the form
+                    e.target.querySelector('input[type="email"]').value = '';
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        button.disabled = false;
+                        button.textContent = originalText;
+                    }, 2000);
+                } else {
+                    // Show error
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.color = '#ffeb3b';
+                    messageDiv.textContent = result.message || 'Something went wrong. Try again.';
+                    
+                    button.disabled = false;
+                    button.textContent = originalText;
                 }
             } catch (error) {
                 console.error('Subscription error:', error);
+                messageDiv.style.display = 'block';
+                messageDiv.style.color = '#ffeb3b';
+                messageDiv.textContent = 'Network error. Please try again.';
+                
+                button.disabled = false;
+                button.textContent = originalText;
             }
         });
     </script>
